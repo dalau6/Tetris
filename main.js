@@ -8,6 +8,26 @@ ctx.canvas.height = ROWS * BLOCK_SIZE;
 // Scale blocks
 ctx.scale(BLOCK_SIZE, BLOCK_SIZE);
 
+document.addEventListener('keydown', event => {
+  if (moves[event.keyCode]) {
+    // Stop the event from bubbling.
+    event.preventDefault();
+
+    // Get new state of piece
+    let p = moves[event.keyCode](board.piece);
+
+    if (board.valid(p)) {
+      // If the move is valid, move the piece.
+      board.piece.move(p);
+
+      // Clear old position before drawing.
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+      board.piece.draw();
+    }
+  }
+});
+
 moves = {
   [KEY.LEFT]: p => ({ ...p, x: p.x - 1 }),
   [KEY.RIGHT]: p => ({ ...p, x: p.x + 1 }),
