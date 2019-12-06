@@ -22,7 +22,6 @@ class Piece {
     this.x = 3;
     this.y = 0;
   }
-}
 
 draw() {
     this.ctx.fillStyle = this.color;
@@ -37,4 +36,4 @@ draw() {
       });
     });
   }
-  
+}
